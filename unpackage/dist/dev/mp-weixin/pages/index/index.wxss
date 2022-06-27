@@ -1,33 +1,50 @@
 
-page.data-v-57280228 {
+page {
 		padding-right: 32rpx;
 		padding-left: 32rpx;
 		background-color: #d2d0a3;
+		
+		width: 100%;
+		height: auto;
+		
+		overflow-y: hidden;
 }
-.status_bar.data-v-57280228 {
+	
+/* 	.home {
+		width: 100%;
+		height: auto;
+	} */
+.status_bar {
 		height: var(--status-bar-height);
 		width: 100%;
 }
-.home-title.data-v-57280228 {
-		margin-top: 48rpx;
-		margin-bottom: 48rpx;
+.home-title {
+		margin-top: 56rpx;
+		margin-bottom: 40rpx;
 
 		color: #2f3262;
 		font-weight: bold;
+		font-size: 24px;
 }
-.home-title-blank.data-v-57280228 {
-		padding: 12rpx;
+.home-title-blank {
+		padding-top: 12rpx;
+		padding-right: 18rpx;
+		padding-bottom: 16rpx;
+		padding-left: 18rpx;
 
 		color: #d2d0a3;
 		background-color: #2f3262;
 }
-.card-row-title.data-v-57280228 {
-		margin-bottom: 16rpx;
+.card-row {
+		margin-bottom: 24rpx;
+}
+.card-row-title {
+		margin-bottom: 4rpx;
 		
 		color: #2f3262;
 		font-weight: 500;
 }
-.card-row-list.data-v-57280228 {
+.card-row-list {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
@@ -36,8 +53,11 @@ page.data-v-57280228 {
 		white-space: nowrap;
 		width: 100%;
 }
-.card-row-item.data-v-57280228 {
+.card-row-item {
 		display: inline-block;
 		
 		margin-right: 24rpx;
+}
+.home-bottom {
+		height: 1000rpx;
 }

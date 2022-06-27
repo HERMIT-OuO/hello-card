@@ -17,11 +17,13 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "./static/tab1.png"
+        "iconPath": "./static/tab1.png",
+        "selectedIconPath": "./static/tab1.png"
       },
       {
         "pagePath": "pages/person/person",
-        "iconPath": "./static/tab2.png"
+        "iconPath": "./static/tab2.png",
+        "selectedIconPath": "./static/tab2.png"
       }
     ]
   },

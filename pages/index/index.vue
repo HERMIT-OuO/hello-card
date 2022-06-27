@@ -4,16 +4,16 @@
 		<view class="status_bar">
 			<!-- 占用一个状态栏的空间 -->
 		</view>
-		<h1 class="home-title">
-			<span class="home-title-blank">HELLO</span> CARD
-		</h1>
+		<view class="home-title">
+			<text class="home-title-blank">HELLO</text> CARD
+		</view>
 		<view class="card-row">
 			<!-- 类别栏 -->
 			<view class="card-row-title">
 				简约
 			</view>
 			<view>
-				<scroll-view class="card-row-list" scroll-x="true" show-scrollbar="false" enable-flex="true">
+				<scroll-view class="card-row-list" scroll-x="true" show-scrollbar="false">
 					<view class="card-row-item">
 						<Card />
 					</view>
@@ -32,7 +32,7 @@
 				经典
 			</view>
 			<view>
-				<scroll-view class="card-row-list" scroll-x="true" show-scrollbar="false" enable-flex="true">
+				<scroll-view class="card-row-list" scroll-x="true" show-scrollbar="false">
 					<view class="card-row-item">
 						<Card />
 					</view>
@@ -45,6 +45,30 @@
 				</scroll-view>
 			</view>
 		</view>
+		<view class="card-row">
+			<!-- 类别栏 -->
+			<view class="card-row-title">
+				经典
+			</view>
+			<view>
+				<scroll-view class="card-row-list" scroll-x="true" show-scrollbar="false">
+					<view class="card-row-item">
+						<Card />
+					</view>
+					<view class="card-row-item">
+						<Card />
+					</view>
+					<view class="card-row-item">
+						<Card />
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+		
+		<view class="home-bottom">
+			
+		</view>
+
 	</view>
 </template>
 
@@ -76,28 +100,42 @@
 		}
 	};
 </script>
-<style scoped>
+<style>	
 	page {
 		padding-right: 32rpx;
 		padding-left: 32rpx;
 		background-color: #d2d0a3;
+		
+		width: 100%;
+		height: auto;
+		
+		overflow-y: hidden;	
 	}
-
+	
+/* 	.home {
+		width: 100%;
+		height: auto;
+	} */
+	
 	.status_bar {
 		height: var(--status-bar-height);
 		width: 100%;
 	}
 
 	.home-title {
-		margin-top: 48rpx;
-		margin-bottom: 32rpx;
+		margin-top: 56rpx;
+		margin-bottom: 40rpx;
 
 		color: #2f3262;
 		font-weight: bold;
+		font-size: 24px;
 	}
 
 	.home-title-blank {
-		padding: 12rpx;
+		padding-top: 12rpx;
+		padding-right: 18rpx;
+		padding-bottom: 16rpx;
+		padding-left: 18rpx;
 
 		color: #d2d0a3;
 		background-color: #2f3262;
@@ -128,5 +166,9 @@
 		display: inline-block;
 		
 		margin-right: 24rpx;
+	}
+	
+	.home-bottom {
+		height: 1000rpx;
 	}
 </style>

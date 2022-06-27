@@ -28,12 +28,14 @@
 			{
 				"pagePath": "pages/index/index",
 				// "text": "首页",
-				"iconPath": "./static/tab1.png"
+				"iconPath": "./static/tab1.png",
+				"selectedIconPath": "./static/tab1.png"
 			},
 			{
 				"pagePath": "pages/person/person",
 				// "text": "个人中心",
-				"iconPath": "./static/tab2.png"
+				"iconPath": "./static/tab2.png",
+				"selectedIconPath": "./static/tab2.png"
 			}
 		]
 	}
