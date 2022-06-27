@@ -1,0 +1,43 @@
+
+page.data-v-57280228 {
+		padding-right: 32rpx;
+		padding-left: 32rpx;
+		background-color: #d2d0a3;
+}
+.status_bar.data-v-57280228 {
+		height: var(--status-bar-height);
+		width: 100%;
+}
+.home-title.data-v-57280228 {
+		margin-top: 48rpx;
+		margin-bottom: 48rpx;
+
+		color: #2f3262;
+		font-weight: bold;
+}
+.home-title-blank.data-v-57280228 {
+		padding: 12rpx;
+
+		color: #d2d0a3;
+		background-color: #2f3262;
+}
+.card-row-title.data-v-57280228 {
+		margin-bottom: 16rpx;
+		
+		color: #2f3262;
+		font-weight: 500;
+}
+.card-row-list.data-v-57280228 {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		
+		white-space: nowrap;
+		width: 100%;
+}
+.card-row-item.data-v-57280228 {
+		display: inline-block;
+		
+		margin-right: 24rpx;
+}

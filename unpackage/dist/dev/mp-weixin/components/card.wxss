@@ -1,0 +1,23 @@
+
+.card.data-v-7fe3b0cb {
+		display: inline-block;
+}
+.card-container.data-v-7fe3b0cb {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		
+		padding: 12rpx;
+		
+		height: 400rpx;
+		width: 300rpx;
+		
+		background-color: white;
+}
+.card-img.data-v-7fe3b0cb {
+}
+.card-text.data-v-7fe3b0cb {
+		text-align: center;
+		color: #2f3262;
+		font-size: 12px;
+}

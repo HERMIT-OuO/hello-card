@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/person/person"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#2f3262",
+    "backgroundColor": "#d2d0a3",
+    "selectedColor": "#2f3262",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "./static/tab1.png"
+      },
+      {
+        "pagePath": "pages/person/person",
+        "iconPath": "./static/tab2.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
