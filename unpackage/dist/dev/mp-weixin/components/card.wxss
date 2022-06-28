@@ -9,12 +9,16 @@
 		
 		padding: 12rpx;
 		
-		height: 400rpx;
+		height: 450rpx;
 		width: 300rpx;
 		
 		background-color: white;
 }
 .card-img.data-v-7fe3b0cb {
+}
+.card-img-item.data-v-7fe3b0cb {
+		height: 400rpx;
+		width: 300rpx;
 }
 .card-text.data-v-7fe3b0cb {
 		text-align: center;

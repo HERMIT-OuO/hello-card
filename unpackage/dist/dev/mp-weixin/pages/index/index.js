@@ -23,7 +23,24 @@ const _sfc_main = {
     Card
   },
   setup() {
-    const data = common_vendor.reactive({});
+    const data = common_vendor.reactive({
+      simpleCardList: [
+        {
+          imgUrl: "",
+          scale: "4:3"
+        },
+        {
+          imgUrl: "",
+          scale: "1:1"
+        },
+        {
+          imgUrl: "",
+          scale: "1:1"
+        }
+      ],
+      classicCardList: [],
+      textCardList: []
+    });
     common_vendor.onBeforeMount(() => {
     });
     common_vendor.onMounted(() => {
@@ -37,7 +54,18 @@ if (!Array) {
   _component_Card();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {};
+  return {
+    a: common_vendor.f(_ctx.simpleCardList, (item, index, i0) => {
+      return {
+        a: "0dd5b10a-0-" + i0,
+        b: common_vendor.p({
+          imgUrl: item.imgUrl,
+          scale: item.scale
+        }),
+        c: index
+      };
+    })
+  };
 }
 var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Files/Code/card-generator/card-generator/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

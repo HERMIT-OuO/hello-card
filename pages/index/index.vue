@@ -14,14 +14,8 @@
 			</view>
 			<view>
 				<scroll-view class="card-row-list" scroll-x="true" show-scrollbar="false">
-					<view class="card-row-item">
-						<Card />
-					</view>
-					<view class="card-row-item">
-						<Card />
-					</view>
-					<view class="card-row-item">
-						<Card />
+					<view v-for="(item, index) in simpleCardList" :key="index" class="card-row-item">
+						<Card :imgUrl="item.imgUrl" :scale="item.scale" />
 					</view>
 				</scroll-view>
 			</view>
@@ -48,7 +42,7 @@
 		<view class="card-row">
 			<!-- 类别栏 -->
 			<view class="card-row-title">
-				经典
+				文字
 			</view>
 			<view>
 				<scroll-view class="card-row-list" scroll-x="true" show-scrollbar="false">
@@ -80,7 +74,11 @@
 		onMounted
 	} from 'vue'
 	import Card from '../../components/card.vue'
-	interface DataProps {}
+	interface DataProps {
+		simpleCardList: any,
+		classicCardList: any,
+		textCardList: any
+	}
 	export default {
 		name: '',
 		components: {
@@ -88,7 +86,22 @@
 		},
 		setup() {
 			const data: DataProps = reactive({
-
+				simpleCardList: [
+					{
+						imgUrl: '',
+						scale: '4:3'
+					},
+					{
+						imgUrl: '',
+						scale: '1:1'
+					},
+					{
+						imgUrl: '',
+						scale: '1:1'
+					}
+				],
+				classicCardList: [],
+				textCardList: []
 			})
 			onBeforeMount(() => {})
 			onMounted(() => {})
@@ -102,14 +115,21 @@
 </script>
 <style>	
 	page {
-		padding-right: 32rpx;
-		padding-left: 32rpx;
+		/* position: fixed;
+		width: 100vw;
+		height: 100vh; */
+		
+		width: 100vw;
+	
+		padding-right: 24rpx;
+		padding-left: 24rpx;
 		background-color: #d2d0a3;
 		
-		width: 100%;
+		/* width: 100%; */
 		height: auto;
 		
-		overflow-y: hidden;	
+		overflow-x:hidden;
+		/* overflow-y: hidden;	 */
 	}
 	
 /* 	.home {
@@ -169,6 +189,6 @@
 	}
 	
 	.home-bottom {
-		height: 1000rpx;
+		height: 100rpx;
 	}
 </style>

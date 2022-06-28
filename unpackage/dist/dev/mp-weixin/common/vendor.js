@@ -14,6 +14,28 @@ function makeMap(str, expectsLowerCase) {
   }
   return expectsLowerCase ? (val) => !!map[val.toLowerCase()] : (val) => !!map[val];
 }
+const toDisplayString = (val) => {
+  return isString(val) ? val : val == null ? "" : isArray(val) || isObject(val) && (val.toString === objectToString || !isFunction(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
+};
+const replacer = (_key, val) => {
+  if (val && val.__v_isRef) {
+    return replacer(_key, val.value);
+  } else if (isMap(val)) {
+    return {
+      [`Map(${val.size})`]: [...val.entries()].reduce((entries, [key, val2]) => {
+        entries[`${key} =>`] = val2;
+        return entries;
+      }, {})
+    };
+  } else if (isSet(val)) {
+    return {
+      [`Set(${val.size})`]: [...val.values()]
+    };
+  } else if (isObject(val) && !isArray(val) && !isPlainObject(val)) {
+    return String(val);
+  }
+  return val;
+};
 const EMPTY_OBJ = Object.freeze({});
 const EMPTY_ARR = Object.freeze([]);
 const NOOP = () => {
@@ -398,9 +420,9 @@ function assertType$1(value, type) {
   let valid;
   const expectedType = getType$1(type);
   if (isSimpleType$1(expectedType)) {
-    const t = typeof value;
-    valid = t === expectedType.toLowerCase();
-    if (!valid && t === "object") {
+    const t2 = typeof value;
+    valid = t2 === expectedType.toLowerCase();
+    if (!valid && t2 === "object") {
       valid = value instanceof type;
     }
   } else if (expectedType === "Object") {
@@ -2430,8 +2452,8 @@ let currentFlushPromise = null;
 let currentPreFlushParentJob = null;
 const RECURSION_LIMIT = 100;
 function nextTick(fn) {
-  const p = currentFlushPromise || resolvedPromise;
-  return fn ? p.then(this ? fn.bind(this) : fn) : p;
+  const p2 = currentFlushPromise || resolvedPromise;
+  return fn ? p2.then(this ? fn.bind(this) : fn) : p2;
 }
 function findInsertionIndex(id) {
   let start = flushIndex + 1;
@@ -3593,7 +3615,7 @@ function isSameType(a, b) {
 }
 function getTypeIndex(type, expectedTypes) {
   if (isArray(expectedTypes)) {
-    return expectedTypes.findIndex((t) => isSameType(t, type));
+    return expectedTypes.findIndex((t2) => isSameType(t2, type));
   } else if (isFunction(expectedTypes)) {
     return isSameType(expectedTypes, type) ? 0 : -1;
   }
@@ -3641,9 +3663,9 @@ function assertType(value, type) {
   let valid;
   const expectedType = getType(type);
   if (isSimpleType(expectedType)) {
-    const t = typeof value;
-    valid = t === expectedType.toLowerCase();
-    if (!valid && t === "object") {
+    const t2 = typeof value;
+    valid = t2 === expectedType.toLowerCase();
+    if (!valid && t2 === "object") {
       valid = value instanceof type;
     }
   } else if (expectedType === "Object") {
@@ -3844,6 +3866,12 @@ function resolve(registry, name) {
 }
 function isVNode(value) {
   return value ? value.__v_isVNode === true : false;
+}
+const InternalObjectKey = `__vInternal`;
+function guardReactiveProps(props) {
+  if (!props)
+    return null;
+  return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
 }
 const getPublicInstance = (i) => {
   if (!i)
@@ -4098,6 +4126,7 @@ function createComponentInstance(vnode, parent, suspense) {
   return instance;
 }
 let currentInstance = null;
+const getCurrentInstance = () => currentInstance || currentRenderingInstance;
 const setCurrentInstance = (instance) => {
   currentInstance = instance;
   instance.scope.on();
@@ -4539,14 +4568,14 @@ function findComponentPublicInstance(mpComponents, id) {
   }
   return null;
 }
-function setTemplateRef({ r, f }, refValue, setupState) {
+function setTemplateRef({ r, f: f2 }, refValue, setupState) {
   if (isFunction(r)) {
     r(refValue, {});
   } else {
     const _isString = isString(r);
     const _isRef = isRef(r);
     if (_isString || _isRef) {
-      if (f) {
+      if (f2) {
         if (!_isRef) {
           return;
         }
@@ -4914,6 +4943,11 @@ function initApp(app) {
   }
 }
 const propsCaches = /* @__PURE__ */ Object.create(null);
+function renderProps(props) {
+  const { uid: uid2, __counter } = getCurrentInstance();
+  const propsId = (propsCaches[uid2] || (propsCaches[uid2] = [])).push(guardReactiveProps(props)) - 1;
+  return uid2 + "," + propsId + "," + __counter;
+}
 function pruneComponentPropsCache(uid2) {
   delete propsCaches[uid2];
 }
@@ -4954,6 +4988,41 @@ function getCreateApp() {
     return my[method];
   }
 }
+function vFor(source, renderItem) {
+  let ret;
+  if (isArray(source) || isString(source)) {
+    ret = new Array(source.length);
+    for (let i = 0, l = source.length; i < l; i++) {
+      ret[i] = renderItem(source[i], i, i);
+    }
+  } else if (typeof source === "number") {
+    if (!Number.isInteger(source)) {
+      warn$1(`The v-for range expect an integer value but got ${source}.`);
+      return [];
+    }
+    ret = new Array(source);
+    for (let i = 0; i < source; i++) {
+      ret[i] = renderItem(i + 1, i, i);
+    }
+  } else if (isObject(source)) {
+    if (source[Symbol.iterator]) {
+      ret = Array.from(source, (item, i) => renderItem(item, i, i));
+    } else {
+      const keys = Object.keys(source);
+      ret = new Array(keys.length);
+      for (let i = 0, l = keys.length; i < l; i++) {
+        const key = keys[i];
+        ret[i] = renderItem(source[key], key, i);
+      }
+    }
+  } else {
+    ret = [];
+  }
+  return ret;
+}
+const f = (source, renderItem) => vFor(source, renderItem);
+const t = (val) => toDisplayString(val);
+const p = (props) => renderProps(props);
 function createApp$1(rootComponent, rootProps = null) {
   rootComponent && (rootComponent.mpType = "app");
   return createVueApp(rootComponent, rootProps).use(plugin);
@@ -5699,8 +5768,11 @@ const createSubpackageApp = initCreateSubpackageApp();
 }
 exports._export_sfc = _export_sfc;
 exports.createSSRApp = createSSRApp;
+exports.f = f;
 exports.onBeforeMount = onBeforeMount;
 exports.onMounted = onMounted;
+exports.p = p;
 exports.reactive = reactive;
 exports.resolveComponent = resolveComponent;
+exports.t = t;
 exports.toRefs = toRefs;

@@ -18,6 +18,10 @@ var __spreadValues = (a, b) => {
 var common_vendor = require("../common/vendor.js");
 const _sfc_main = {
   name: "Card",
+  props: {
+    imgUrl: String,
+    scale: String
+  },
   setup() {
     const data = common_vendor.reactive({});
     common_vendor.onBeforeMount(() => {
@@ -29,7 +33,10 @@ const _sfc_main = {
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {};
+  return {
+    a: $props.imgUrl,
+    b: common_vendor.t($props.scale)
+  };
 }
 var Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-7fe3b0cb"], ["__file", "D:/Files/Code/card-generator/card-generator/components/card.vue"]]);
 wx.createComponent(Component);
